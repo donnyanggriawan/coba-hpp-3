@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        
+
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -27,8 +27,24 @@
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+                <li class="nav-item">
+                    <a href="/dashboard" class="nav-link {{ (request()->is('dashboard')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-solid fa-house"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/kategori" class="nav-link {{ (request()->is('kategori')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-solid fa-list"></i>
+                        <p>
+                            Kategori
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Starter Pages
@@ -38,28 +54,20 @@
                     <ul class="nav nav-treeview">
                         @if (auth()->user()->level == 'admin')
                             <li class="nav-item">
-                                <a href="/admin" class="nav-link ">
+                                <a href="{{ route('halamanadmin') }}" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Admin</p>
                                 </a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a href="/user" class="nav-link">
+                                <a href="{{ route('halamanuser') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>User</p>
                                 </a>
                             </li>
                         @endif
                     </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="/logout" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
-                            Logout
-                        </p>
-                    </a>
                 </li>
             </ul>
         </nav>

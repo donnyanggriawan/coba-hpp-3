@@ -24,10 +24,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
 
-            @if (session()->has('success'))
+            @if (session()->has('message'))
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <i class="icon fas fa-check"></i> {{ session()->get('success') }}
+                    <i class="icon fas fa-check"></i> {{ session()->get('message') }}
                 </div>
             @endif
 
@@ -71,7 +71,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     @endif
                                 </div>
                             </div>
-                            
 
                         </div>
                         <div class="col-md-9">
@@ -80,26 +79,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <ul class="nav nav-pills">
                                         <li class="nav-item">
                                             <a class="nav-link active" href="#profile" data-toggle="tab">Edit
-                                                Profile</a>
+                                                Password</a>
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="card-body">
                                     <div class="tab-content">
 
-                                        {{-- Edit Profile --}}
+                                        {{-- Edit Password --}}
                                         <div class="active tab-pane" id="profile">
                                             <form id="quickForm" class="form-horizontal"
-                                                action="{{ route('profile.update') }}" method="post">
+                                                action="{{ route('password.update') }}" method="post">
                                                 @method('put')
                                                 @csrf
                                                 <div class="form-group row">
-                                                    <label for="name" class="col-sm-2 col-form-label">Name</label>
+                                                    <label for="current_password"
+                                                        class="col-sm-2 col-form-label">Current Password</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" name="name" class="form-control"
-                                                            id="name" placeholder="Name"
-                                                            value="{{ old('name', Auth::user()->name) }}" />
-                                                        @error('name')
+                                                        <input type="password" name="current_password"
+                                                            class="form-control" id="current_password"
+                                                            placeholder="Current Password" />
+                                                        @error('current_password')
                                                             <div class="text-danger">
                                                                 {{ $message }}
                                                             </div>
@@ -107,13 +107,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="username"
-                                                        class="col-sm-2 col-form-label">Username</label>
+                                                    <label for="password" class="col-sm-2 col-form-label">New
+                                                        Password</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" name="username" class="form-control"
-                                                            id="username" placeholder="Username"
-                                                            value="{{ old('username', Auth::user()->username) }}" />
-                                                        @error('username')
+                                                        <input type="password" name="password" class="form-control"
+                                                            id="password" placeholder="New Password" />
+                                                        @error('password')
+                                                            <div class="text-danger">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="password_confirmation"
+                                                        class="col-sm-2 col-form-label">Validation Password</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="password" name="password_confirmation"
+                                                            class="form-control" id="password_confirmation"
+                                                            placeholder="Validation Password" />
+                                                        @error('password_confirmation')
                                                             <div class="text-danger">
                                                                 {{ $message }}
                                                             </div>

@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(User $user)
     {
         $data = [
-            'title' => 'Home'
+            'title' => 'Home',
+            'user' => $user
         ];
 
         return view('dashboard.dashboard', $data);
@@ -17,11 +19,19 @@ class DashboardController extends Controller
 
     public function halamanAdmin()
     {
-        return view('dashboard.admin');
+        $data = [
+            'title' => 'Halaman Admin'
+        ];
+
+        return view('dashboard.admin', $data);
     }
 
     public function halamanUser()
     {
-        return view('dashboard.user');
+        $data = [
+            'title' => 'Halaman User'
+        ];
+
+        return view('dashboard.user', $data);
     }
 }

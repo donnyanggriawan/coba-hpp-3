@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -28,8 +29,13 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/profile/{id}' ,[ProfileController::class, 'index'])->name('profile');
-    Route::put('/profile/upadte' ,[ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/profile' ,[ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile/update' ,[ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/password' ,[ProfileController::class, 'viewPassword'])->name('password');
+    Route::put('/password/update' ,[ProfileController::class, 'changePassword'])->name('password.update');
+
+    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() {

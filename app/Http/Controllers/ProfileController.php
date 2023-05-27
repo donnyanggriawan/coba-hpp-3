@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class ProfileController extends Controller
 {
@@ -12,12 +15,10 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $user = User::find($id);
         $data = [
-            'title' => 'Edit Akun',
-            'user' => $user
+            'title' => 'Edit Nama',
         ];
 
         return view('profile.profile', $data);
@@ -73,29 +74,16 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        // $attr = $request->validate([
-        //     'name' => ['string', 'min:3', 'max:191', 'required'],
-        //     'username' => ['required', 'alpha_num', 'unique:users,username' . auth()->id()]
-        // ]);
+        $attr = $request->validate([
+            'name' => ['string', 'min:3', 'max:191', 'required',],
+            'username' => ['required', 'alpha_num', 'unique:users,username,' . auth()->id()]
+        ]);
 
-        // auth()->user()->update($attr);
+        auth()->user()->update($attr);
 
-        // return back()->with('message', 'Your Profil has been update');
-        $rules = [
-            'name' => ['string', 'min:3', 'max:191'],
-            'username' => ['alpha_num', 'unique:users,username' . auth()->id()]
-        ];
-
-        $validateData = $request->validate($rules);
-
-        $validateData['id'] = auth()->user()->id;
-
-        User::where('id', $user->id)
-                ->update($validateData);
-
-        return redirect('/profile/{id}')->with('succes', 'Profile has been update');
+        return redirect()->route('profile')->with('success', 'Profile has been updated!');
 
     }
 
@@ -108,5 +96,31 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function viewPassword()
+    {
+        $data = [
+            'title' => 'Edit Password',
+        ];
+
+        return view('profile.password', $data);
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => ['required'],
+            'password' => ['required', 'min:3', 'confirmed'],
+        ]);
+
+        if (Hash::check($request->current_password, Auth::user()->password)) {
+            auth()->user()->update(['password' => Hash::make($request->password)]);
+            return back()->with('message', 'Ur Password has been updated');
+        }
+
+        throw ValidationException::withMessages([
+            'current_password' => 'Your Password does not match with our record',
+        ]);
     }
 }

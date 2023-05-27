@@ -16,7 +16,8 @@
             {{ auth()->user()->name }}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{route('profile',auth()->user()->id)}}"><i class="fa-solid fa-user"></i> Profile</a>
+            <a class="dropdown-item" href="{{ route('profile') }}"><i class="fa-solid fa-user"></i> Change Name</a>
+            <a class="dropdown-item" href="{{ route('password') }}"><i class="fa-solid fa-user"></i> Change Password</a>
             <a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
             {{-- <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="#">Contact</a> --}}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,11 +15,23 @@ class LoginController extends Controller
 
     public function auth(Request $request)
     {
-        //dd($request->all());
-        if (Auth::attempt($request->only('username', 'password'))){
-            return redirect('/dashboard');
+        $credentials =$request -> validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+            $user = Auth::user();
+            if ($user->level == 'admin') {
+                return redirect('/dashboard');
+            }
+            if ($user->level == 'user') {
+                return redirect('/dashboard');
+            }
         }
-        return redirect('login.login');
+
+        return back()->with('loginError','Username & Password not match');
     }
 
     public function logout(Request $request)
@@ -29,6 +42,6 @@ class LoginController extends Controller
      
         $request->session()->regenerateToken();
      
-        return redirect('/')->with('loginError','Berhasil Logout!');
+        return redirect('/')->with('logout','Logout Success');
     }
 }
