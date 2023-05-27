@@ -24,12 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
 
-            @if (session()->has('success'))
-                <div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <i class="icon fas fa-check"></i> {{ session()->get('success') }}
-                </div>
-            @endif
+
 
             <section class="content-header">
                 <div class="container-fluid">
@@ -55,23 +50,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="card-body box-profile">
                                     <div class="text-center">
                                         @if (auth()->user()->level == 'admin')
-                                            <img class="profile-user-img img-fluid img-circle"
-                                                src="{{ asset('img/admin.png') }}" alt="User profile picture" />
+                                        <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/admin.png') }}" alt="User profile picture" />
                                         @else
-                                            <img class="profile-user-img img-fluid img-circle"
-                                                src="{{ asset('img/barista.jpg') }}" alt="User profile picture" />
+                                        <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/barista.jpg') }}" alt="User profile picture" />
                                         @endif
 
                                     </div>
                                     <h3 class="profile-username text-center">{{ auth()->user()->name }}</h3>
                                     @if (auth()->user()->level == 'admin')
-                                        <p class="text-muted text-center">Admin</p>
+                                    <p class="text-muted text-center">Admin</p>
                                     @else
-                                        <p class="text-muted text-center">Barista</p>
+                                    <p class="text-muted text-center">Barista</p>
                                     @endif
                                 </div>
                             </div>
-                            
+
 
                         </div>
                         <div class="col-md-9">
@@ -89,44 +82,48 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                                         {{-- Edit Profile --}}
                                         <div class="active tab-pane" id="profile">
-                                            <form id="quickForm" class="form-horizontal"
-                                                action="{{ route('profile.update') }}" method="post">
+                                            <form id="quickForm" class="form-horizontal" action="{{ route('profile.update') }}" method="post">
                                                 @method('put')
                                                 @csrf
                                                 <div class="form-group row">
                                                     <label for="name" class="col-sm-2 col-form-label">Name</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" name="name" class="form-control"
-                                                            id="name" placeholder="Name"
-                                                            value="{{ old('name', Auth::user()->name) }}" />
+                                                        <input type="text" name="name" class="form-control" id="name" placeholder="Name" value="{{ old('name', Auth::user()->name) }}" />
                                                         @error('name')
-                                                            <div class="text-danger">
-                                                                {{ $message }}
-                                                            </div>
+                                                        <div class="text-danger">
+                                                            {{ $message }}
+                                                        </div>
                                                         @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="username"
-                                                        class="col-sm-2 col-form-label">Username</label>
+                                                    <label for="username" class="col-sm-2 col-form-label">Username</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" name="username" class="form-control"
-                                                            id="username" placeholder="Username"
-                                                            value="{{ old('username', Auth::user()->username) }}" />
+                                                        <input type="text" name="username" class="form-control" id="username" placeholder="Username" value="{{ old('username', Auth::user()->username) }}" />
                                                         @error('username')
-                                                            <div class="text-danger">
-                                                                {{ $message }}
-                                                            </div>
+                                                        <div class="text-danger">
+                                                            {{ $message }}
+                                                        </div>
                                                         @enderror
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
+                                                    <div class="offset-sm-2 col-sm-10">
+                                                        @if (session()->has('success'))
+                                                        <div class="alert alert-success alert-dismissible">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                                            <i class="icon fas fa-check"></i> {{ session()->get('success') }}
+                                                        </div>
+                                                        @endif
+                                                    </div>
                                                     <div class="offset-sm-2 col-sm-10">
                                                         <button type="submit" class="btn btn-danger">
                                                             Change
                                                         </button>
                                                     </div>
                                                 </div>
+
+
                                             </form>
                                         </div>
                                         {{-- End --}}
