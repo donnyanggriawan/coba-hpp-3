@@ -24,13 +24,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
 
-            @if (session()->has('message'))
-                <div class="alert alert-success alert-dismissible">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <i class="icon fas fa-check"></i> {{ session()->get('message') }}
-                </div>
-            @endif
-
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -134,6 +127,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
+                                                    <div class="offset-sm-2 col-sm-10">
+                                                        @if (session()->has('message'))
+                                                            <div class="alert alert-success alert-dismissible">
+                                                                <button type="button" class="close"
+                                                                    data-dismiss="alert"
+                                                                    aria-hidden="true">&times;</button>
+                                                                <i class="icon fas fa-check"></i>
+                                                                {{ session()->get('message') }}
+                                                            </div>
+                                                        @endif
+                                                    </div>
                                                     <div class="offset-sm-2 col-sm-10">
                                                         <button type="submit" class="btn btn-danger">
                                                             Change

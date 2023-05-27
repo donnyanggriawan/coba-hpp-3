@@ -20,17 +20,6 @@
 <body class="hold-transition login-page">
 
     <div class="login-box">
-        @if (session()->has('loginError'))
-            <div class="alert alert-danger alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <i class="icon fas fa-ban"></i> {{ session()->get('loginError') }}
-            </div>
-        @elseif (session()->has('logout'))
-            <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <i class="icon fas fa-check"></i> {{ session()->get('logout') }}
-            </div>
-        @endif
         <div class="login-logo">
             <a href="#"><b>Admin</b>LTE</a>
         </div>
@@ -61,11 +50,26 @@
                     </div>
                     <div class="row">
                         <div class="col-8">
-                            
+
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                        </div>
+                        <div class="col mt mt-3">
+                            @if (session()->has('loginError'))
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                    <i class="icon fas fa-ban"></i> {{ session()->get('loginError') }}
+                                </div>
+                            @elseif (session()->has('logout'))
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert"
+                                        aria-hidden="true">&times;</button>
+                                    <i class="icon fas fa-check"></i> {{ session()->get('logout') }}
+                                </div>
+                            @endif
                         </div>
                         <!-- /.col -->
                     </div>
