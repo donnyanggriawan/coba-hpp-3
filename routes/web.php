@@ -37,6 +37,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function() {
 
     Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
     Route::post('/kategori/tambah', [KategoriController::class, 'store'])->name('kategori.tambah');
+    Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('kategori.edit');
+    Route::post('/kategori/update/{id}', [KategoriController::class, 'update'])->name('kategori.update');
+    Route::delete('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.delete');
+
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() {

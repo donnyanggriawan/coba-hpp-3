@@ -63,7 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
-                                        <div class="card-footer pb-3">
+                                        <div class="card-footer">
                                             <button type="submit" class="btn btn-secondary">Submit</button>
                                         </div>
                                         <div class="card-footer pb-3">
@@ -73,6 +73,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         aria-hidden="true">&times;</button>
                                                     <i class="icon fas fa-check"></i>
                                                     {{ session()->get('success') }}
+                                                </div>
+                                            @elseif (session()->has('successUpdate'))
+                                                <div class="alert alert-success alert-dismissible">
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                        aria-hidden="true">&times;</button>
+                                                    <i class="icon fas fa-check"></i>
+                                                    {{ session()->get('successUpdate') }}
                                                 </div>
                                             @endif
                                         </div>
@@ -102,34 +109,53 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <table id="example2" class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th class="col-2">No</th>
-                                                    <th class="col-4">Nama</th>
-                                                    <th>Olah Data</th>
+                                                    <th class="col-1">No</th>
+                                                    <th class="col-5">Nama</th>
+                                                    <th class="col-7">Olah Data</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @php
-                                                    $number = 1;
-                                                @endphp
-                                                @foreach ($kategori as $key)
+                                                @if (!empty($kategori) && $kategori->count())
+                                                    @foreach ($kategori as $key => $data)
+                                                        <tr>
+                                                            <td>{{ $kategori->firstItem() + $key }}</td>
+                                                            <td>
+                                                                {{ $data->nama_kategori }}
+                                                            </td>
+                                                            <td>
+                                                                <div class="px3">
+                                                                    <a href="{{ route('kategori.edit', $data->id) }}"
+                                                                        class="btn btn-primary btn-sm col-2"><i
+                                                                            class="nav-icon fas fa-solid fa-pen-to-square"></i>
+                                                                        Edit
+                                                                    </a>
+                                                                    <a href="{{ route('kategori.delete', ['id' => $data->id]) }}"
+                                                                        class="btn btn-danger btn-sm col-2"
+                                                                        onclick="event.preventDefault(); document.getElementById('delete-form').submit();"><i
+                                                                            class="nav-icon fas fa-solid fa-trash"></i>
+                                                                        Delete
+                                                                    </a>
+                                                                    <form id="delete-form"
+                                                                        action="{{ route('kategori.delete', ['id' => $data->id]) }}"
+                                                                        method="POST" style="display: none;">
+                                                                        @method('DELETE')
+                                                                        @csrf
+                                                                    </form>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
                                                     <tr>
-                                                        <td>{{ $number }}</td>
-                                                        <td>
-                                                            {{ $key->nama_kategori }}
-                                                        </td>
-                                                        <td>
-                                                            <div class="px3">
-                                                                <button type="button" class="btn btn-block btn-primary btn-sm">Primary</button>
-                                                                <button type="button" class="btn btn-block btn-danger btn-sm">Danger</button>
-                                                            </div>
-                                                        </td>
+                                                        <td>Tidak ada Data</td>
                                                     </tr>
-                                                    @php
-                                                        $number++;
-                                                    @endphp
-                                                @endforeach
+                                                @endif
                                             </tbody>
+                                            <tfoot>
+                                                <div class="row">{{ $kategori->links() }}</div>
+                                            </tfoot>
                                         </table>
+
                                     </div>
                                     <!-- /.card-body -->
                                 </div>

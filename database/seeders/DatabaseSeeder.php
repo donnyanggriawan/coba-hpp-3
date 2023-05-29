@@ -35,6 +35,15 @@ class DatabaseSeeder extends Seeder
                 'level' => 'user',
                 'password' => bcrypt('123'),               
             ]
-    ]);
+        ]);
+
+        DB::table('kategoris')->insert([
+            [
+                'nama_kategori' => 'coffee',               
+            ],
+            [
+                'nama_kategori' => 'mocktail',               
+            ]
+        ]);
     }
 }

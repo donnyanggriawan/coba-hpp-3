@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreKategoriRequest;
 use App\Http\Requests\UpdateKategoriRequest;
 
@@ -16,7 +17,7 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $kategori = Kategori::paginate(2);
+        $kategori = DB::table('kategoris')->orderBy('id')->paginate(3);
 
         $data = [
             'title' => 'Kategori',
@@ -72,9 +73,16 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function edit(Kategori $kategori)
+    public function edit($id)
     {
-        //
+        $kategori = Kategori::find($id);
+
+        $data = [
+            'title' => 'Edit Kategori',
+            'kategori' => $kategori,
+        ];
+     
+        return view('kategori.edit', $data);
     }
 
     /**
@@ -84,9 +92,24 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateKategoriRequest $request, Kategori $kategori)
+    public function update(Request $request, $id)
     {
-        //
+        $kategori = Kategori::whereId($id)->first();
+
+        if ($kategori->nama_kategori == $request->nama_kategori) {
+            return redirect()->route('kategori');
+        } else {
+            $request->validate([
+                'nama_kategori' => ['required', 'min:3' ,'unique:kategoris,nama_kategori']
+            ]);
+
+            $kategori->update([
+                'nama_kategori' => $request->nama_kategori
+            ]);
+    
+            return redirect()->route('kategori')->with('successUpdate', 'Update Category');
+        }
+
     }
 
     /**
@@ -95,8 +118,12 @@ class KategoriController extends Controller
      * @param  \App\Models\Kategori  $kategori
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kategori $kategori)
+    public function destroy($id)
     {
-        //
+        $kategori = Kategori::findOrFail($id); // Mengambil kategori berdasarkan ID
+
+        $kategori->delete();
+
+        return redirect()->route('kategori')->with('successDelete', 'Deleted Category');
     }
 }
