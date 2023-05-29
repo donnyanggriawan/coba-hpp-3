@@ -53,12 +53,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <div class="form-group mb-0">
                                                 <label for="nama_kategori">Nama Kategori</label>
                                                 <input type="text" name="nama_kategori" class="form-control"
-                                                    id="nama_kategori" placeholder="Nama Kategori">
+                                                    id="nama_kategori" placeholder="Nama Kategori"
+                                                    value="{{ old('nama_kategori') }}">
+                                                @error('nama_kategori')
+                                                    <div class="text-danger">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
                                         <div class="card-footer pb-3">
                                             <button type="submit" class="btn btn-secondary">Submit</button>
+                                        </div>
+                                        <div class="card-footer pb-3">
+                                            @if (session()->has('success'))
+                                                <div class="alert alert-success alert-dismissible">
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                        aria-hidden="true">&times;</button>
+                                                    <i class="icon fas fa-check"></i>
+                                                    {{ session()->get('success') }}
+                                                </div>
+                                            @endif
                                         </div>
                                     </form>
                                 </div>
@@ -79,49 +95,40 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="col-12">
                                 <div class="card card-secondary">
                                     <div class="card-header">
-                                        <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                                        <h3 class="card-title">List Data Category</h3>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <table id="example2" class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>Rendering engine</th>
-                                                    <th>Browser</th>
-                                                    <th>Platform(s)</th>
-                                                    <th>Engine version</th>
-                                                    <th>CSS grade</th>
+                                                    <th class="col-2">No</th>
+                                                    <th class="col-4">Nama</th>
+                                                    <th>Olah Data</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet
-                                                        Explorer 4.0
-                                                    </td>
-                                                    <td>Win 95+</td>
-                                                    <td> 4</td>
-                                                    <td>X</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Trident</td>
-                                                    <td>Internet
-                                                        Explorer 5.0
-                                                    </td>
-                                                    <td>Win 95+</td>
-                                                    <td>5</td>
-                                                    <td>C</td>
-                                                </tr>                                                
+                                                @php
+                                                    $number = 1;
+                                                @endphp
+                                                @foreach ($kategori as $key)
+                                                    <tr>
+                                                        <td>{{ $number }}</td>
+                                                        <td>
+                                                            {{ $key->nama_kategori }}
+                                                        </td>
+                                                        <td>
+                                                            <div class="px3">
+                                                                <button type="button" class="btn btn-block btn-primary btn-sm">Primary</button>
+                                                                <button type="button" class="btn btn-block btn-danger btn-sm">Danger</button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    @php
+                                                        $number++;
+                                                    @endphp
+                                                @endforeach
                                             </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Rendering engine</th>
-                                                    <th>Browser</th>
-                                                    <th>Platform(s)</th>
-                                                    <th>Engine version</th>
-                                                    <th>CSS grade</th>
-                                                </tr>
-                                            </tfoot>
                                         </table>
                                     </div>
                                     <!-- /.card-body -->

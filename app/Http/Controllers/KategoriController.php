@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kategori;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreKategoriRequest;
 use App\Http\Requests\UpdateKategoriRequest;
 
@@ -15,8 +16,11 @@ class KategoriController extends Controller
      */
     public function index()
     {
+        $kategori = Kategori::paginate(2);
+
         $data = [
-            'title' => 'Kategori'
+            'title' => 'Kategori',
+            'kategori' => $kategori
         ];
 
         return view('kategori.kategori', $data);
@@ -38,13 +42,17 @@ class KategoriController extends Controller
      * @param  \App\Http\Requests\StoreKategoriRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreKategoriRequest $request)
+    public function store(Request $request)
     {
-        dd('succes');
-
-        $validateData = $request->validate([
-            'nama_kategori' => ['required', 'unique:kategoris,nama_kategori']
+        $request->validate([
+            'nama_kategori' => ['required', 'min:3' ,'unique:kategoris,nama_kategori']
         ]);
+
+        $kategoris = Kategori::create([
+            'nama_kategori' => $request->nama_kategori
+        ]);
+
+        return redirect()->route('kategori')->with('success', 'Added New Category');
     }
 
     /**
