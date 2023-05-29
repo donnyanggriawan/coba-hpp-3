@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function() {
     Route::put('/password/update' ,[ProfileController::class, 'changePassword'])->name('password.update');
 
     Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori');
+    Route::post('/kategori/tambah', [KategoriController::class, 'store'])->name('kategori.tambah');
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() {

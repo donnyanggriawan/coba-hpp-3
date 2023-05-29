@@ -47,7 +47,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="card-header">
                                         <h3 class="card-title">Tambah Kategori</h3>
                                     </div>
-                                    <form id="quickForm">
+                                    <form id="quickForm" action="{{ route('kategori.tambah') }}" method="POST">
+                                        @csrf
                                         <div class="card-body">
                                             <div class="form-group mb-0">
                                                 <label for="nama_kategori">Nama Kategori</label>
@@ -56,7 +57,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </div>
                                         </div>
                                         <!-- /.card-body -->
-                                        <div class="card-footer mb-3">
+                                        <div class="card-footer pb-3">
                                             <button type="submit" class="btn btn-secondary">Submit</button>
                                         </div>
                                     </form>
