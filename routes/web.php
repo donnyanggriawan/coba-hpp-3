@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\BahanbakuController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -40,6 +41,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function() {
     Route::get('/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('kategori.edit');
     Route::post('/kategori/update/{id}', [KategoriController::class, 'update'])->name('kategori.update');
     Route::delete('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.delete');
+
+    Route::get('/bahanbaku', [BahanbakuController::class, 'index'])->name('bahanbaku');
 
 });
 

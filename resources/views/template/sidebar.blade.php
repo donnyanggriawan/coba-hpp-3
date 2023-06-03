@@ -43,6 +43,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/bahanbaku" class="nav-link {{ (request()->is('bahanbaku')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-brands fa-apple"></i>
+                        <p>
+                            Bahan Baku
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>

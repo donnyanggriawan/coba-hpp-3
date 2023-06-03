@@ -153,6 +153,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             </tbody>
                                             <tfoot>
                                                 <div class="row">{{ $kategori->links() }}</div>
+                                                @if (session()->has('successDelete'))
+                                                    <div class="alert alert-success alert-dismissible">
+                                                        <button type="button" class="close" data-dismiss="alert"
+                                                            aria-hidden="true">&times;</button>
+                                                        <i class="icon fas fa-check"></i>
+                                                        {{ session()->get('successDelete') }}
+                                                    </div>
+                                                @endif
                                             </tfoot>
                                         </table>
 
