@@ -48,14 +48,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="card-header">
                                     <h3 class="card-title">Tambah Bahan Baku</h3>
                                 </div>
+                                @php
+                                    $connection = mysqli_connect('localhost', 'root', '', 'coba-hpp-3');
+                                    $auto = mysqli_query($connection, 'SELECT max(kd_bahan) AS max_code FROM bahanbakus');
+                                    $data = mysqli_fetch_array($auto);
+                                    $code = $data['max_code'];
+                                    $urutan = (int) substr($code, 2, 3);
+                                    $urutan++;
+                                    $huruf = 'KD';
+                                    $kd_kat = $huruf . sprintf('%03s', $urutan);
+                                @endphp
                                 <form id="quickForm" action="{{ route('bahanbaku.store') }}" method="POST">
                                     @csrf
                                     <div class="card-body">
                                         <div class="form-group mb-0">
                                             <label for="kode_bahan">Kode Bahan</label>
                                             <input type="text" name="kode_bahan" class="form-control mb-2"
-                                                id="kode_bahan" placeholder="Kode Bahan"
-                                                value="{{ $kode->bahan }}" readonly>
+                                                id="kode_bahan" placeholder="Kode Bahan" value="@php
+                                                    echo $kd_kat;
+                                                @endphp"
+                                                readonly>
                                             @error('kode_bahan')
                                                 <div class="text-danger">
                                                     {{ $message }}
@@ -72,18 +84,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             @enderror
                                             <label for="satuan">Satuan</label>
                                             <input type="text" name="satuan" class="form-control mb-2"
-                                                id="satuan" placeholder="Satuan"
-                                                value="{{ old('satuan') }}">
+                                                id="satuan" placeholder="Satuan" value="{{ old('satuan') }}">
                                             @error('satuan')
                                                 <div class="text-danger">
                                                     {{ $message }}
                                                 </div>
                                             @enderror
                                             <label for="harga">Harga</label>
-                                            <input type="number" name="harga" class="form-control"
-                                                id="harga" placeholder="Harga"
-                                                value="{{ old('harga') }}">
+                                            <input type="number" name="harga" class="form-control mb-2"
+                                                id="harga" placeholder="Harga" value="{{ old('harga') }}">
                                             @error('harga')
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                            <label for="per">Per</label>
+                                            <input type="number" name="per" class="form-control" id="per"
+                                                placeholder="Per" value="{{ old('per') }}">
+                                            @error('per')
                                                 <div class="text-danger">
                                                     {{ $message }}
                                                 </div>

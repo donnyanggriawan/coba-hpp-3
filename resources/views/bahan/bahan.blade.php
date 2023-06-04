@@ -48,36 +48,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
-                                    <table id="example2" class="table table-bordered table-hover">
+                                    <table id="example2" class="table table-bordered table-hover text-center">
                                         <thead>
-
                                             <tr>
-                                                <th class="col-1">No</th>
-                                                <th class="col-5">Nama</th>
-                                                <th class="col-7">Olah Data</th>
+                                                <th class="col1">No</th>
+                                                <th class="col2">Kode Bahan</th>
+                                                <th class="col3">Nama Bahan</th>
+                                                <th class="col2">Satuan Bahan</th>
+                                                <th class="col3">Harga</th>
+                                                <th class="col4">Olah Data</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if (!empty($kategori) && $kategori->count())
-                                                @foreach ($kategori as $key => $data)
+                                            @if (!empty($bahanbakus) && $bahanbakus->count())
+                                                @foreach ($bahanbakus as $key => $data)
                                                     <tr>
-                                                        <td>{{ $kategori->firstItem() + $key }}</td>
+                                                        <td>{{ $bahanbakus->firstItem() + $key }}</td>
                                                         <td>
-                                                            {{ $data->nama_kategori }}
+                                                            {{ $data->kd_bahan }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $data->nama_bahan }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $data->satuan }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $data->harga }}
                                                         </td>
                                                         <td>
                                                             <div class="px3">
-                                                                <a href="{{ route('kategori.edit', $data->id) }}"
+                                                                <a href=""class="btn btn-primary btnku" ><i class="fas fa-edit"></i></a>
+                                                                <a href=""class="btn btn-danger btnku" ><i class="fas fa-trash"></i></a>
+                                                                {{-- <a href="{{ route('kategori.edit', $data->id) }}"
                                                                     class="btn btn-primary btn-sm col-2"><i
-                                                                        class="nav-icon fas fa-solid fa-pen-to-square"></i>
-                                                                    Edit
+                                                                        class="fas fa-solid fa-pen-to-square"></i>
+                                                                    
                                                                 </a>
                                                                 <a href="{{ route('kategori.delete', ['id' => $data->id]) }}"
                                                                     class="btn btn-danger btn-sm col-2"
                                                                     onclick="event.preventDefault(); document.getElementById('delete-form').submit();"><i
                                                                         class="nav-icon fas fa-solid fa-trash"></i>
-                                                                    Delete
-                                                                </a>
+                                                                    
+                                                                </a> --}}
                                                                 <form id="delete-form"
                                                                     action="{{ route('kategori.delete', ['id' => $data->id]) }}"
                                                                     method="POST" style="display: none;">
@@ -97,19 +110,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             @endif
                                         </tbody>
                                         <tfoot>
-                                            {{-- <div class="row">{{ $kategori->links() }}</div> --}}
+                                            <div class="row">{{ $bahanbakus->links() }}</div>
 
-                                            @if (session()->has('successDelete'))
+                                            @if (session()->has('success'))
                                                 <div class="alert alert-success alert-dismissible">
                                                     <button type="button" class="close" data-dismiss="alert"
                                                         aria-hidden="true">&times;</button>
                                                     <i class="icon fas fa-check"></i>
-                                                    {{ session()->get('successDelete') }}
+                                                    {{ session()->get('success') }}
                                                 </div>
                                             @endif
                                         </tfoot>
                                     </table>
-
                                 </div>
                                 <div class="card-footer">
                                     <a href="{{ route('bahanbaku.tambah') }}">
