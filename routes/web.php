@@ -43,6 +43,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function() {
     Route::delete('/kategori/delete/{id}', [KategoriController::class, 'destroy'])->name('kategori.delete');
 
     Route::get('/bahanbaku', [BahanbakuController::class, 'index'])->name('bahanbaku');
+    Route::get('/bahanbaku/tambah', [BahanbakuController::class, 'create'])->name('bahanbaku.tambah');
+    Route::post('/bahanbaku/store', [BahanbakuController::class, 'store'])->name('bahanbaku.store');
+
+
 
 });
 

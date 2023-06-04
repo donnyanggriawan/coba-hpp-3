@@ -28,7 +28,16 @@ class BahanbakuController extends Controller
      */
     public function create()
     {
-        //
+        $bahan = Bahanbaku::selectRaw('LPAD(CONVERT(COUNT("id") + 1, char(3)) , 3,"0") as bahan')->first();
+        $addkode = new Bahanbaku();
+        $addkode->bahan = 'KB'. $bahan->bahan;
+
+        $data = [
+            'title' => 'Tambah Bahan Baku',
+            'kode' => $addkode
+        ];
+
+        return view('bahan.tambah', $data);
     }
 
     /**

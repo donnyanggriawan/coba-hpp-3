@@ -23,34 +23,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-              <div class="container-fluid">
-                <div class="row mb-2">
-                  <div class="col-sm-6">
-                    <h1>Bahan Baku</h1>
-                  </div>
-                  <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                      
-                    </ol>
-                  </div>
-                </div>
-              </div><!-- /.container-fluid -->
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Bahan Baku</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
             </section>
-        
+
             <!-- Main content -->
             <section class="content">
-                <div class="container-fluid mt-3">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
                             <div class="card card-secondary">
                                 <div class="card-header">
-                                    <h3 class="card-title">List Data Category</h3>
+                                    <h3 class="card-title">List Data Bahan</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>
-                                            
+
                                             <tr>
                                                 <th class="col-1">No</th>
                                                 <th class="col-5">Nama</th>
@@ -98,7 +98,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         </tbody>
                                         <tfoot>
                                             {{-- <div class="row">{{ $kategori->links() }}</div> --}}
-                                            
+
                                             @if (session()->has('successDelete'))
                                                 <div class="alert alert-success alert-dismissible">
                                                     <button type="button" class="close" data-dismiss="alert"
@@ -111,6 +111,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </table>
 
                                 </div>
+                                <div class="card-footer">
+                                    <a href="{{ route('bahanbaku.tambah') }}">
+                                        <button type="submit" class="btn btn-secondary">Tambah</button>
+                                    </a>
+                                </div>
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
@@ -121,10 +126,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <!-- /.row -->
                 </div>
-              <!-- /.container-fluid -->
+                <!-- /.container-fluid -->
             </section>
             <!-- /.content -->
-          </div>
+        </div>
         <!-- /.content-wrapper -->
 
         <!-- Control Sidebar -->

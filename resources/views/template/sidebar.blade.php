@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/kategori" class="nav-link {{ (request()->is('kategori')) ? 'active' : '' }}">
+                    <a href="/kategori" class="nav-link {{ (request()->is('kategori*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-solid fa-list"></i>
                         <p>
                             Kategori
@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/bahanbaku" class="nav-link {{ (request()->is('bahanbaku')) ? 'active' : '' }}">
+                    <a href="/bahanbaku" class="nav-link {{ (request()->is('bahanbaku*')) ? 'active' : '' }}">
                         <i class="nav-icon fas fa-brands fa-apple"></i>
                         <p>
                             Bahan Baku
