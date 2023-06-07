@@ -74,28 +74,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             {{ $data->satuan }}
                                                         </td>
                                                         <td>
-                                                            {{ $data->harga }}
+                                                            {{ $data->harga }} / {{ $data->satuan }}
                                                         </td>
                                                         <td>
                                                             <div class="px3">
-                                                                <a href=""class="btn btn-primary btnku" ><i class="fas fa-edit"></i></a>
-                                                                <a href=""class="btn btn-danger btnku" ><i class="fas fa-trash"></i></a>
-                                                                {{-- <a href="{{ route('kategori.edit', $data->id) }}"
-                                                                    class="btn btn-primary btn-sm col-2"><i
-                                                                        class="fas fa-solid fa-pen-to-square"></i>
-                                                                    
-                                                                </a>
-                                                                <a href="{{ route('kategori.delete', ['id' => $data->id]) }}"
-                                                                    class="btn btn-danger btn-sm col-2"
-                                                                    onclick="event.preventDefault(); document.getElementById('delete-form').submit();"><i
-                                                                        class="nav-icon fas fa-solid fa-trash"></i>
-                                                                    
-                                                                </a> --}}
-                                                                <form id="delete-form"
-                                                                    action="{{ route('kategori.delete', ['id' => $data->id]) }}"
-                                                                    method="POST" style="display: none;">
-                                                                    @method('DELETE')
+                                                                <a
+                                                                    href="{{ route('bahanbaku.edit', $data->id) }}"class="btn btn-primary btnku"><i
+                                                                        class="fas fa-edit"></i></a>
+                                                                <form
+                                                                    action="{{ route('bahanbaku.delete', $data->id) }}"
+                                                                    method="post" class="d-inline">
+                                                                    @method('delete')
                                                                     @csrf
+                                                                    <button type="button"
+                                                                        class="btn btn-danger"
+                                                                        onclick="return confirm('Are u Sure?')"><i
+                                                                            class="fas fa-trash"></i></button>
+
+                                                                    {{-- <button class="badge bg-danger border-0"
+                                                                        onclick="return confirm('Are u Sure?')"><span
+                                                                            data-feather="x-circle"
+                                                                            class="align-text-bottom"></span></button> --}}
                                                                 </form>
                                                             </div>
                                                         </td>
@@ -110,7 +109,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             @endif
                                         </tbody>
                                         <tfoot>
-                                            <div class="row">{{ $bahanbakus->links() }}</div>
 
                                             @if (session()->has('success'))
                                                 <div class="alert alert-success alert-dismissible">
@@ -119,14 +117,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <i class="icon fas fa-check"></i>
                                                     {{ session()->get('success') }}
                                                 </div>
+                                            @elseif (session()->has('successUpdate'))
+                                                <div class="alert alert-success alert-dismissible">
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                        aria-hidden="true">&times;</button>
+                                                    <i class="icon fas fa-check"></i>
+                                                    {{ session()->get('successUpdate') }}
+                                                </div>
                                             @endif
                                         </tfoot>
+
                                     </table>
                                 </div>
                                 <div class="card-footer">
                                     <a href="{{ route('bahanbaku.tambah') }}">
                                         <button type="submit" class="btn btn-secondary">Tambah</button>
                                     </a>
+                                    <div class="float-sm-right">{{ $bahanbakus->links() }}</div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>

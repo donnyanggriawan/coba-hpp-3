@@ -66,6 +66,7 @@ class BahanbakuController extends Controller
             'nama_bahan' => $request->nama_bahan,
             'satuan' => $request->satuan,
             'harga' => ($request->harga / $request->per),
+            'per' => $request->per
         ]);
 
         return redirect()->route('bahanbaku')->with('success', 'Added New Bahan');
@@ -88,9 +89,16 @@ class BahanbakuController extends Controller
      * @param  \App\Models\Bahanbaku  $bahanbaku
      * @return \Illuminate\Http\Response
      */
-    public function edit(Bahanbaku $bahanbaku)
+    public function edit(Bahanbaku $bahanbaku, $id)
     {
-        //
+        $bahanbakus = Bahanbaku::find($id);
+
+        $data = [
+            'title' => 'Edit Bahan Baku',
+            'bahanbakus' => $bahanbakus,
+        ];
+     
+        return view('bahan.edit', $data);
     }
 
     /**
@@ -100,9 +108,37 @@ class BahanbakuController extends Controller
      * @param  \App\Models\Bahanbaku  $bahanbaku
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bahanbaku $bahanbaku)
+    public function update(Request $request, $id)
     {
-        //
+        $bahanbakus = Bahanbaku::whereId($id)->first();
+
+        $request->validate([
+            'kode_bahan' => ['required', 'alpha_num' , 'size:5'],
+            'nama_bahan' => ['required', 'min:3'],
+            'satuan' => ['required', 'max:12'],
+            'harga' => ['required', 'numeric'],
+            'per' => ['required', 'numeric']
+        ]);
+
+        if ((
+            ($bahanbakus->nama_bahan == $request->nama_bahan) &&
+            ($bahanbakus->satuan == $request->satuan) &&
+            ($bahanbakus->harga == $request->harga / $request->per) &&
+            ($bahanbakus->per == $request->per)
+        )) 
+        {
+            return redirect()->route('bahanbaku');
+        } else {
+            $bahanbakus->update([
+                'kd_bahan' => $request->kode_bahan,
+                'nama_bahan' => $request->nama_bahan,
+                'satuan' => $request->satuan,
+                'harga' => ($request->harga / $request->per),
+                'per' => $request->per
+            ]);
+        
+            return redirect()->route('bahanbaku')->with('successUpdate', 'Update Bahan Baku');
+        }
     }
 
     /**
@@ -113,6 +149,8 @@ class BahanbakuController extends Controller
      */
     public function destroy(Bahanbaku $bahanbaku)
     {
-        //
+        Bahanbaku::destroy($bahanbaku->id);
+
+        return redirect()->route('bahanbaku')->with('success', 'New Post has been deleted!');
     }
 }

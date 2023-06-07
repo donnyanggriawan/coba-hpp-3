@@ -19,6 +19,7 @@ return new class extends Migration
             $table->char('nama_bahan', 128);
             $table->char('satuan', 11);
             $table->integer('harga');
+            $table->integer('per');
             $table->timestamps();
         });
     }

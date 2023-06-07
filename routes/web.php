@@ -45,9 +45,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function() {
     Route::get('/bahanbaku', [BahanbakuController::class, 'index'])->name('bahanbaku');
     Route::get('/bahanbaku/tambah', [BahanbakuController::class, 'create'])->name('bahanbaku.tambah');
     Route::post('/bahanbaku/store', [BahanbakuController::class, 'store'])->name('bahanbaku.store');
-
-
-
+    Route::get('/bahanbaku/edit/{id}', [BahanbakuController::class, 'edit'])->name('bahanbaku.edit');
+    Route::post('/bahanbaku/update/{id}', [BahanbakuController::class, 'update'])->name('bahanbaku.update');
+    Route::delete('/bahanbaku/delete/{id}', [BahanbakuController::class, 'destroy'])->name('bahanbaku.delete');
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() {
