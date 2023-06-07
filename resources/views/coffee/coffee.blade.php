@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Bahan Baku</h1>
+                            <h1>Coffee</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -44,7 +44,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="col-12">
                             <div class="card card-secondary">
                                 <div class="card-header">
-                                    <h3 class="card-title">List Data Bahan</h3>
+                                    <h3 class="card-title">List Data Coffee</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -52,48 +52,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <thead>
                                             <tr>
                                                 <th class="col1">No</th>
-                                                <th class="col2">Kode Bahan</th>
-                                                <th class="col3">Nama Bahan</th>
-                                                <th class="col2">Satuan Bahan</th>
-                                                <th class="col3">Harga</th>
+                                                <th class="col2">Kode Coffee</th>
+                                                <th class="col3">Nama Coffee</th>
+                                                <th class="col2">Kategori</th>
+                                                <th class="col3">Keterangan</th>
                                                 <th class="col4">Olah Data</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if (!empty($bahanbakus) && $bahanbakus->count())
-                                                @foreach ($bahanbakus as $key => $data)
+                                            @if (!empty($coffees) && $coffees->count())
+                                                @foreach ($coffees as $key => $data)
                                                     <tr>
-                                                        <td>{{ $bahanbakus->firstItem() + $key }}</td>
+                                                        <td>{{ $coffees->firstItem() + $key }}</td>
                                                         <td>
-                                                            {{ $data->kd_bahan }}
+                                                            {{ $data->kd_coffee }}
                                                         </td>
                                                         <td>
-                                                            {{ $data->nama_bahan }}
+                                                            {{ $data->nama_coffee }}
                                                         </td>
                                                         <td>
-                                                            {{ $data->satuan }}
+                                                            {{ $data->kategori->nama_kategori }}
                                                         </td>
                                                         <td>
-                                                            {{ $data->harga }} / {{ $data->satuan }}
+                                                            {{ $data->keterangan }}
                                                         </td>
                                                         <td>
                                                             <div class="px3">
                                                                 <a
-                                                                    href="{{ route('bahanbaku.edit', $data->id) }}"class="btn btn-primary btnku"><i
+                                                                    href="{{ route('coffee.edit', $data->id) }}"class="btn btn-primary btnku"><i
                                                                         class="fas fa-edit"></i></a>
                                                                 <a
                                                                     href="bahanbaku/delete/{{ $data->id }}" class="btn btn-danger btnku" onclick="return confirm('are u sure?')"><i
                                                                         class="fas fa-trash"></i></a>
-
-                                                                {{-- <form
-                                                                    action="{{ route('bahanbaku.delete', $data->id) }}"
-                                                                    method="post" class="d-inline">
-                                                                    @method('delete')
-                                                                    @csrf
-                                                                    <button type="button" class="btn btn-danger"
-                                                                        onclick="return confirm('Are u Sure?')"><i
-                                                                            class="fas fa-trash"></i></button>
-                                                                </form> --}}
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -128,10 +118,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </table>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="{{ route('bahanbaku.tambah') }}">
+                                    <a href="{{ route('coffee.tambah') }}">
                                         <button type="submit" class="btn btn-secondary">Tambah</button>
                                     </a>
-                                    <div class="float-sm-right">{{ $bahanbakus->links() }}</div>
+                                    <div class="float-sm-right">{{ $coffees->links() }}</div>
                                 </div>
                                 <!-- /.card-body -->
                             </div>

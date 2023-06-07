@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CoffeeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\BahanbakuController;
@@ -47,7 +48,16 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function() {
     Route::post('/bahanbaku/store', [BahanbakuController::class, 'store'])->name('bahanbaku.store');
     Route::get('/bahanbaku/edit/{id}', [BahanbakuController::class, 'edit'])->name('bahanbaku.edit');
     Route::post('/bahanbaku/update/{id}', [BahanbakuController::class, 'update'])->name('bahanbaku.update');
-    Route::delete('/bahanbaku/delete/{id}', [BahanbakuController::class, 'destroy'])->name('bahanbaku.delete');
+    Route::get('/bahanbaku/delete/{id}', [BahanbakuController::class, 'destroy'])->name('bahanbaku.delete');
+
+    Route::get('/coffee', [CoffeeController::class, 'index'])->name('coffee');
+    Route::get('/coffee/tambah', [CoffeeController::class, 'create'])->name('coffee.tambah');
+    Route::post('/coffee/store', [CoffeeController::class, 'store'])->name('coffee.store');
+    Route::get('/coffee/edit/{id}', [CoffeeController::class, 'edit'])->name('coffee.edit');
+    Route::get('/coffee/update/{id}', [CoffeeController::class, 'update'])->name('coffee.update');
+
+
+
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() {

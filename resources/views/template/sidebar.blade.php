@@ -51,6 +51,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/coffee" class="nav-link {{ (request()->is('coffee*')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-solid fa-mug-saucer"></i>
+                        <p>
+                            Coffee
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
