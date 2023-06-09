@@ -54,9 +54,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function() {
     Route::get('/coffee/tambah', [CoffeeController::class, 'create'])->name('coffee.tambah');
     Route::post('/coffee/store', [CoffeeController::class, 'store'])->name('coffee.store');
     Route::get('/coffee/edit/{id}', [CoffeeController::class, 'edit'])->name('coffee.edit');
-    Route::get('/coffee/update/{id}', [CoffeeController::class, 'update'])->name('coffee.update');
-
-
+    Route::post('/coffee/update/{id}', [CoffeeController::class, 'update'])->name('coffee.update');
+    Route::get('/coffee/delete/{id}', [CoffeeController::class, 'destroy'])->name('coffee.delete');
 
 });
 

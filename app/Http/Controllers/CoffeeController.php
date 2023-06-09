@@ -111,9 +111,35 @@ class CoffeeController extends Controller
      * @param  \App\Models\Coffee  $coffee
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCoffeeRequest $request, Coffee $coffee)
+    public function update(Request $request, $id)
     {
-        //
+        $coffees = Coffee::whereId($id)->first();
+
+        if ((
+            ($coffees->kd_coffee == $request->kode_coffee) &&
+            ($coffees->nama_coffee == $request->nama_coffee) &&
+            ($coffees->kategori_id == $request->kategori) &&
+            ($coffees->keterangan == $request->keterangan)
+        )) 
+        {
+            return redirect()->route('coffee');
+        } else {
+            $request->validate([
+                'kode_coffee' => ['required', 'alpha_num' , 'size:5'],
+                'nama_coffee' => ['required', 'min:3', 'unique:coffees,nama_coffee'],
+                'kategori' => ['required'],
+                'keterangan' => ['required', 'min:3', 'max:1000']
+            ]);
+
+            $coffees->update([
+                'kd_coffee' => $request->kode_coffee,
+                'nama_coffee' => $request->nama_coffee,
+                'kategori_id' => $request->kategori,
+                'keterangan' => $request->keterangan
+            ]);
+        
+            return redirect()->route('coffee')->with('successUpdate', 'Update Menu');
+        }
     }
 
     /**
@@ -122,8 +148,10 @@ class CoffeeController extends Controller
      * @param  \App\Models\Coffee  $coffee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Coffee $coffee)
+    public function destroy($id)
     {
-        //
+        DB::table('coffees')->where('id',$id)->delete();
+
+        return redirect()->route('coffee')->with('success', 'Menu has been deleted!');
     }
 }

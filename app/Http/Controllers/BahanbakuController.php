@@ -151,6 +151,6 @@ class BahanbakuController extends Controller
     {
         DB::table('bahanbakus')->where('id',$id)->delete();
 
-        return redirect()->route('bahanbaku')->with('success', 'New Post has been deleted!');
+        return redirect()->route('bahanbaku')->with('success', 'Bahan has been deleted!');
     }
 }

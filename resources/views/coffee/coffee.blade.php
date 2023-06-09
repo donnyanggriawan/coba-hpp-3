@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                                     href="{{ route('coffee.edit', $data->id) }}"class="btn btn-primary btnku"><i
                                                                         class="fas fa-edit"></i></a>
                                                                 <a
-                                                                    href="bahanbaku/delete/{{ $data->id }}" class="btn btn-danger btnku" onclick="return confirm('are u sure?')"><i
+                                                                    href="{{ route('coffee.delete', $data->id) }}" class="btn btn-danger btnku" onclick="return confirm('are u sure?')"><i
                                                                         class="fas fa-trash"></i></a>
                                                             </div>
                                                         </td>
