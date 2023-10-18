@@ -151,6 +151,6 @@ class BahanbakuController extends Controller
     {
         Bahanbaku::destroy($bahanbaku->id);
 
-        return redirect()->route('bahanbaku')->with('success', 'New Post has been deleted!');
+        return redirect()->route('bahanbaku')->with('success', 'New Menu has been deleted!');
     }
 }

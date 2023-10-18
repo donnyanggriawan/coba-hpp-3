@@ -51,6 +51,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="/menu" class="nav-link {{ (request()->is('menu*')) ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-solid fa-bars"></i>
+                        <p>
+                            Menu
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>

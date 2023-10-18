@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KategoriController;
@@ -48,6 +49,13 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function() {
     Route::get('/bahanbaku/edit/{id}', [BahanbakuController::class, 'edit'])->name('bahanbaku.edit');
     Route::post('/bahanbaku/update/{id}', [BahanbakuController::class, 'update'])->name('bahanbaku.update');
     Route::delete('/bahanbaku/delete/{id}', [BahanbakuController::class, 'destroy'])->name('bahanbaku.delete');
+
+    Route::get('/menu', [MenuController::class, 'index'])->name('menu');
+    Route::get('/menu/tambah', [MenuController::class, 'create'])->name('menu.tambah');
+    Route::post('/menu/store', [MenuController::class, 'store'])->name('menu.store');
+    Route::get('/menu/edit/{id}', [MenuController::class, 'edit'])->name('menu.edit');
+    Route::post('/menu/update/{id}', [MenuController::class, 'update'])->name('menu.update');
+    Route::delete('/menu/delete', [MenuController::class, 'destroy'])->name('menu.delete');
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() {
