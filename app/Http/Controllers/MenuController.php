@@ -138,14 +138,12 @@ class MenuController extends Controller
      * @param  \App\Models\Menu  $menu
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu, $id, Request $request)
+    public function destroy($id)
     {
-        // Menu::destroy($menu->id);
-        // $menu = Menu::find($id);
-        // $menu->delete();
+        DB::table('menus')->where('id', $id)->delete();
 
-        $id = $request->input('delete_makanan');
-        Menu::whereId($id)->delete();
+        // $id = $request->input('delete_makanan');
+        // Menu::whereId($id)->delete();
 
         return redirect()->route('menu')->with('success', 'New Menu has been deleted!');
     }

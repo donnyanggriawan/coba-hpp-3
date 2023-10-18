@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:admin,user']], function() {
     Route::post('/menu/store', [MenuController::class, 'store'])->name('menu.store');
     Route::get('/menu/edit/{id}', [MenuController::class, 'edit'])->name('menu.edit');
     Route::post('/menu/update/{id}', [MenuController::class, 'update'])->name('menu.update');
-    Route::delete('/menu/delete', [MenuController::class, 'destroy'])->name('menu.delete');
+    Route::get('/menu/delete/{id}', [MenuController::class, 'destroy'])->name('menu.delete');
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:admin']], function() {
