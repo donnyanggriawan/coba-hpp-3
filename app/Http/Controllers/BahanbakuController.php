@@ -147,9 +147,9 @@ class BahanbakuController extends Controller
      * @param  \App\Models\Bahanbaku  $bahanbaku
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bahanbaku $bahanbaku)
+    public function destroy($id)
     {
-        Bahanbaku::destroy($bahanbaku->id);
+        DB::table('bahanbakus')->where('id',$id)->delete();
 
         return redirect()->route('bahanbaku')->with('success', 'New Menu has been deleted!');
     }
